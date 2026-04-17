@@ -2,36 +2,36 @@
 
 ## Overview
 
-![GitOps Flow](./docs/images/gitops.png)
-
-Helm과 ArgoCD를 활용하여 GitOps 기반의 배포 환경을 구성하는 리포지토리입니다.
+**[sandbox-ecommerce-api](https://github.com/ym1085/sandbox-ecommerce-api)** 배포 및 운영을 위한 리포지토리입니다.
 
 ## Project Structure
 
 ```shell
 ├── argocd/
-│   ├── applications/       # Application manifests
-│   ├── appprojects/        # Project configs
-│   └── install/            # ArgoCD installation values
+│   ├── applications/
+│   ├── appprojects/
+│   └── install/
 │       ├── dev/
-│       │   ├── core/
-│       │   └── image-updater/
-│       ├── stg/
-│       │   ├── core/
-│       │   └── image-updater/
+│       ├── stg
 │       └── prod/
-│           ├── core/
-│           └── image-updater/
-├── charts/                 # Helm charts
+├── charts/
 │   ├── order-service/
 │   └── user-service/
-├── manifests/              # Raw K8s manifests (practice)
 ├── script/
-│   ├── cluster/kind/       # Local cluster setup
-│   ├── gitops/argocd/      # ArgoCD setup
-│   └── infrastructure/     # AWS EKS, ALB Ingress Controller..
+│   ├── cluster/
+│   ├── gitops/
+│   └── infrastructure/
 └── helmfile.yaml
 ```
+
+### Components
+
+| 분류                | 경로            | 내용                                                    |
+| :------------------ | :-------------- | :------------------------------------------------------ |
+| **ArgoCD Ops**      | `argocd/`       | ArgoCD 설치, AppProjects 및 Application 매니페스트 관리 |
+| **Helm Charts**     | `charts/`       | 서비스별 Helm 차트 및 배포 템플릿 정의                  |
+| **Automation**      | `script/`       | 클러스터 프로비저닝 및 GitOps 구성 자동화 스크립트      |
+| **Helm Management** | `helmfile.yaml` | Helm 릴리스 통합 관리 및 환경별 변수 주입               |
 
 ## Prerequisites
 

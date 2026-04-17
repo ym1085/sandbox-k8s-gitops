@@ -1,0 +1,60 @@
+###############################################################################
+# Kind Cluster configuration
+# 1. kind cluster의 경우 Docker Container에 구동되는 특징이 존재
+# 2. hostPort는 OS의 Port이고 containerPort는 kind cluster의 node의 port를 의미
+# 3. node port를 ingress nginx controller와 동일하게 매핑하여 통신 하도록 설정
+###############################################################################
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: helm-cluster
+nodes:
+  - role: control-plane
+  - role: worker
+    extraPortMappings:
+      # --- DEV ENV ---
+      # Ingress
+      - hostPort: 30080
+        containerPort: 30080 # hostPort(30080) -> Ingress svc(30080) -> Ingress pod  -> svc -> pod
+        protocol: TCP
+      - hostPort: 30443
+        containerPort: 30443 # hostPort(30443) -> Ingress svc(30443) -> Ingress pod  -> svc -> pod
+        protocol: TCP
+      # ArgoCD
+      - hostPort: 30180
+        containerPort: 30180 # hostPort(30180) -> ArgoCD svc(30180) -> ArgoCD pod  -> svc -> pod
+        protocol: TCP
+      - hostPort: 30543
+        containerPort: 30543 # hostPort(30543) -> ArgoCD svc(30543) -> ArgoCD pod  -> svc -> pod
+        protocol: TCP
+
+      # --- STG ENV ---
+      # Ingress
+      - hostPort: 31080
+        containerPort: 31080 # hostPort(31080) -> Ingress svc(31080) -> Ingress pod  -> svc -> pod
+        protocol: TCP
+      - hostPort: 31443
+        containerPort: 31443 # hostPort(31443) -> Ingress svc(31443) -> Ingress pod  -> svc -> pod
+        protocol: TCP
+      # ArgoCD
+      - hostPort: 31180
+        containerPort: 31180 # hostPort(31180) -> ArgoCD svc(31180) -> ArgoCD pod  -> svc -> pod
+        protocol: TCP
+      - hostPort: 31543
+        containerPort: 31543 # hostPort(31543) -> ArgoCD svc(31543) -> ArgoCD pod  -> svc -> pod
+        protocol: TCP
+
+      # --- PROD ENV ---
+      # Ingress
+      - hostPort: 32080
+        containerPort: 32080 # hostPort(32080) -> Ingress svc(32080) -> Ingress pod  -> svc -> pod
+        protocol: TCP
+      - hostPort: 32443
+        containerPort: 32443 # hostPort(32443) -> Ingress svc(32443) -> Ingress pod  -> svc -> pod
+        protocol: TCP
+      # ArgoCD
+      - hostPort: 32180
+        containerPort: 32180 # hostPort(32180) -> ArgoCD svc(32180) -> ArgoCD pod  -> svc -> pod
+        protocol: TCP
+      - hostPort: 32543
+        containerPort: 32543 # hostPort(32543) -> ArgoCD svc(32543) -> ArgoCD pod  -> svc -> pod
+        protocol: TCP
