@@ -2,7 +2,7 @@
 
 ## Overview
 
-**[sandbox-ecommerce-api](https://github.com/ym1085/sandbox-ecommerce-api)** 배포 및 운영을 위한 리포지토리입니다.
+Kubernetes 배포 및 운영을 위한 GitOps 기반 인프라 리포지토리입니다. ArgoCD를 통해 애플리케이션 배포를 관리하고, Helm/Helmfile을 사용하여 서비스별 릴리스와 환경(dev/stg/prod) 구성을 일관되게 운영합니다.
 
 ## Project Structure
 
