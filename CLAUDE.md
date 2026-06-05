@@ -25,7 +25,7 @@
 
 ## CRITICAL 주의사항
 
-- CRITICAL: 현재 로컬 Git remote는 `sandbox-k8s-gitops`지만, Argo CD Application의 `repoURL`은 `aws-eks-helm-lab`를 가리킨다.
+- CRITICAL: 로컬 Git remote 및 Argo CD Application의 `repoURL`은 모두 `sandbox-k8s-gitops`(`https://github.com/ym1085/sandbox-k8s-gitops.git`)를 가리킨다.
 - CRITICAL: 로컬 변경사항이 곧바로 Argo CD 동기화 대상이라고 가정하면 안 된다.
 - CRITICAL: chart 수정만으로 배포가 바뀐다고 보지 않는다. 해당 chart를 어떤 Argo CD Application이 어떤 `repoURL`, `targetRevision`, `values file`로 바라보는지 먼저 확인한다.
 - CRITICAL: `charts/user-service/templates/deployment.yaml`은 `env` 렌더링이 `resources` 조건 내부에 묶여 있다. `order-service`와 동일 동작이라고 가정하면 틀릴 수 있다.

@@ -29,7 +29,7 @@
 
 ## CRITICAL 주의사항
 
-- CRITICAL: 현재 로컬 Git remote는 `https://github.com/ym1085/sandbox-k8s-gitops.git` 이지만, Argo CD `Application.spec.source.repoURL`은 `https://github.com/ym1085/aws-eks-helm-lab.git` 를 가리킨다.
+- CRITICAL: 로컬 Git remote 및 Argo CD `Application.spec.source.repoURL`은 모두 `https://github.com/ym1085/sandbox-k8s-gitops.git`를 가리킨다.
 - CRITICAL: 로컬 변경이 곧바로 실제 동기화 대상이라고 가정하지 않는다.
 - CRITICAL: chart 수정만으로 배포가 바뀐다고 보지 않는다. 어떤 `Application`이 어떤 `repoURL`, `targetRevision`, `path`, `valueFiles`를 바라보는지 먼저 확인한다.
 - CRITICAL: `targetRevision`은 환경 계약의 일부다. 의도 없이 바꾸지 않는다.
