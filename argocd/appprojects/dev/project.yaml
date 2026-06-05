@@ -9,7 +9,7 @@ spec:
 
   # ArgoCD가 소스를 가져올 수 있는 저장소 지정 (Git, Helm repo 등)
   sourceRepos:
-    - "https://github.com/ym1085/aws-eks-helm-lab.git"
+    - "https://github.com/ym1085/sandbox-k8s-gitops.git"
     - "https://kubernetes.github.io/ingress-nginx"
 
   # ArgoCD가 배포할 수 있는 네임스페이스를 명시적으로 제한 (보안 강화)

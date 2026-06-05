@@ -17,7 +17,7 @@ spec:
 
   # 배포할 소스(Git/Helm) 정보 설정
   source:
-    repoURL: https://github.com/ym1085/aws-eks-helm-lab.git # manifest 파일이 위치한 Git 저장소 URL
+    repoURL: https://github.com/ym1085/sandbox-k8s-gitops.git # manifest 파일이 위치한 Git 저장소 URL
     targetRevision: dev # 추적할 브랜치, 태그 또는 커밋 해시 (master 브랜치 감시)
     path: charts/order-service # 저장소 내에서 Helm 차트나 k8s manifest가 위치한 상대 경로
     helm:

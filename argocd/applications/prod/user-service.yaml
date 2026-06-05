@@ -14,7 +14,7 @@ spec:
   project: prod-project
 
   source:
-    repoURL: https://github.com/ym1085/aws-eks-helm-lab.git
+    repoURL: https://github.com/ym1085/sandbox-k8s-gitops.git
     targetRevision: master
     path: charts/user-service
     helm:
