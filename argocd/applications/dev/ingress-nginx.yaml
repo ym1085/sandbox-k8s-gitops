@@ -23,7 +23,7 @@ spec:
             nodePorts: # NodePort를 사용하여 hostPort와 containerPort를 매핑
               http: 30080
               https: 30443
-          admissionWebhook:
+          admissionWebhooks:
             enabled: false
 
   destination:
