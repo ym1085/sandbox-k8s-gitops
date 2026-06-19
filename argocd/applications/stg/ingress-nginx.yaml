@@ -22,7 +22,7 @@ spec:
             nodePorts:
               http: 31080
               https: 31443
-          admissionWebhook:
+          admissionWebhooks:
             enabled: false
 
   destination:
