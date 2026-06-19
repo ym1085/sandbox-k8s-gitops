@@ -17,12 +17,13 @@ case "${ENV_NUM}" in
 esac
 
 ####################################
-# 기존 namespace 삭제 (있을 경우)
+# 최초 설치 여부 확인
 ####################################
-echo "기존 ArgoCD namespace 삭제 중..."
-kubectl delete namespace argocd --ignore-not-found=true
-echo " 삭제 완료 대기"
-kubectl wait --for=delete namespace/argocd --timeout=60s >/dev/null || true
+if kubectl get namespace argocd >/dev/null 2>&1; then
+  echo "ERROR: namespace 'argocd' already exists."
+  echo "This script only supports the initial Argo CD installation."
+  exit 1
+fi
 
 ####################################
 # 경로 계산
@@ -35,9 +36,7 @@ echo -e "ROOT_DIR: $ROOT_DIR\n"
 # ArgoCD namespace 생성
 ####################################
 echo "ArgoCD namespace 생성 중..."
-kubectl create \
-    namespace argocd \
-    --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace argocd
 
 ####################################
 # Helm 리포지토리 추가
