@@ -62,7 +62,7 @@ spec:
 
 | 옵션                    | 의미                                        | 현재 예시                        |
 | ----------------------- | ------------------------------------------- | -------------------------------- |
-| `metadata.name`         | Argo CD Application 이름                    | `order-service-dev`             |
+| `metadata.name`         | Argo CD Application 이름                    | `order-service-dev`              |
 | `metadata.namespace`    | Application CR이 생성되는 namespace         | `argocd`                         |
 | `spec.project`          | 사용할 AppProject 이름                      | `order-dev`                      |
 | `source.repoURL`        | Git 또는 Helm repository                    | `sandbox-k8s-gitops.git`         |
@@ -138,17 +138,17 @@ spec:
 
 ## 현재 Project 연결
 
-| 환경 | Application   | AppProject       | 허용 namespace                                |
-| ---- | ------------- | ---------------- | --------------------------------------------- |
-| dev  | order         | `order-dev`   | `order-dev`         |
-| dev  | user          | `user-dev`    | `user-dev`          |
-| dev  | ingress-nginx | `infra-dev`   | `ingress-nginx-dev` |
-| stg  | order         | `order-stg`   | `order-stg`         |
-| stg  | user          | `user-stg`    | `user-stg`          |
-| stg  | ingress-nginx | `infra-stg`   | `ingress-nginx-stg` |
-| prod | order         | `order-prod`  | `order-prod`        |
-| prod | user          | `user-prod`   | `user-prod`         |
-| prod | ingress-nginx | `infra-prod`  | `ingress-nginx-prod`|
+| 환경 | Application   | AppProject   | 허용 namespace       |
+| ---- | ------------- | ------------ | -------------------- |
+| dev  | order         | `order-dev`  | `order-dev`          |
+| dev  | user          | `user-dev`   | `user-dev`           |
+| dev  | ingress-nginx | `infra-dev`  | `ingress-nginx-dev`  |
+| stg  | order         | `order-stg`  | `order-stg`          |
+| stg  | user          | `user-stg`   | `user-stg`           |
+| stg  | ingress-nginx | `infra-stg`  | `ingress-nginx-stg`  |
+| prod | order         | `order-prod` | `order-prod`         |
+| prod | user          | `user-prod`  | `user-prod`          |
+| prod | ingress-nginx | `infra-prod` | `ingress-nginx-prod` |
 
 ## 배포 판단 순서
 

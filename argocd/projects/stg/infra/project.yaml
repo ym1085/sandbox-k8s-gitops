@@ -13,3 +13,16 @@ spec:
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
+  namespaceResourceWhitelist:
+    - group: "apps"
+      kind: "Deployment"
+    - group: ""
+      kind: "Service"
+    - group: ""
+      kind: "ConfigMap"
+    - group: ""
+      kind: "ServiceAccount"
+    - group: "rbac.authorization.k8s.io"
+      kind: "Role"
+    - group: "rbac.authorization.k8s.io"
+      kind: "RoleBinding"
