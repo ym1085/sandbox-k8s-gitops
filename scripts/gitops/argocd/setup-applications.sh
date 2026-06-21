@@ -22,9 +22,17 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$SCRIPT_DIR/../../.."
 echo -e "ROOT_DIR: $ROOT_DIR\n"
 
+for PROJECT in "order-${PROFILE}" "user-${PROFILE}" "infra-${PROFILE}"; do
+  if ! kubectl get appproject "$PROJECT" -n argocd >/dev/null 2>&1; then
+    echo "ERROR: AppProject '$PROJECT' does not exist."
+    echo "Run setup-appprojects.sh for the same environment first."
+    exit 1
+  fi
+done
+
 ####################################
 # Applications 생성
 ####################################
 echo "Creating Applications..."
-kubectl apply -f "$ROOT_DIR/argocd/${PROFILE}/applications/"
+kubectl apply -R -f "$ROOT_DIR/argocd/applications/${PROFILE}/"
 echo "Applications created successfully"
