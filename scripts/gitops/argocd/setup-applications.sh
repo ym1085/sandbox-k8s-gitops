@@ -26,5 +26,5 @@ echo -e "ROOT_DIR: $ROOT_DIR\n"
 # Applications 생성
 ####################################
 echo "Creating Applications..."
-kubectl apply -f "$ROOT_DIR/argocd/applications/${PROFILE}/"
+kubectl apply -f "$ROOT_DIR/argocd/${PROFILE}/applications/"
 echo "Applications created successfully"

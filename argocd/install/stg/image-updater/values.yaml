@@ -1,9 +1,0 @@
-config:
-  registries: # 컨테이너 레지스트리 목록
-    - name: Docker Hub # 레지스트리의 논리적 이름
-      api_url: https://registry-1.docker.io # Docker Registry HTTP API v2 엔드포인트
-      prefix: "docker.io" # 이미지 Pull 시 사용할 이미지 경로 접두사
-      ping: true # 레지스트리에 접근 가능한지 체크할지 여부 (true면 주기적으로 ping)
-      credentials: pullsecret:argocd/docker-hub-creds # argocd 네임스페이스에 존재하는 Docker Registry 인증 Secret을 사용
-      default: true
-  logLevel: debug # Image Updater 로그 레벨 설정
