@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: infra-stg
+  namespace: argocd
+spec:
+  description: "Staging infrastructure services"
+  sourceRepos:
+    - "https://kubernetes.github.io/ingress-nginx"
+  destinations:
+    - namespace: "ingress-nginx-stg"
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"

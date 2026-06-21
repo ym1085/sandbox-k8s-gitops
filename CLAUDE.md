@@ -6,21 +6,23 @@
 
 ## 수정 위치 규칙
 
-- 실제 배포 경로와 동기화 기준은 `argocd/{env}/applications`에서 확인한다.
-- 배포 허용 범위와 프로젝트 정책은 `argocd/{env}/appprojects`에서 관리한다.
+- 실제 배포 경로와 동기화 기준은 `argocd/applications/{env}/{domain}`에서 확인한다.
+- 배포 허용 범위와 프로젝트 정책은 `argocd/projects/{env}/{domain}`에서 관리한다.
 - 서비스 스펙 변경은 `charts/order-service`, `charts/user-service`에서 한다.
 - `ingress-nginx`는 로컬 chart가 아니라 Argo CD가 외부 Helm repo에서 직접 설치한다.
 - 환경별 차이는 반드시 `values-{env}.yaml`에 둔다. 공통값만 `values.yaml`에 둔다.
 
 ## 아키텍처 규칙
 
-- CRITICAL: 실제 배포 설정은 항상 `argocd/{env}/applications`를 먼저 본다.
+- CRITICAL: 실제 배포 설정은 항상 `argocd/applications/{env}`를 먼저 본다.
 - CRITICAL: 어떤 환경에 무엇이 배포되는지는 항상 Argo CD Application 기준으로 판단한다.
 - CRITICAL: `order-service`와 `user-service`는 구조가 유사하지만 완전히 동일하지 않다. 한쪽만 보고 공통 리팩터링하지 않는다.
 - CRITICAL: `dev`, `stg`, `prod`는 같은 방식으로 운영되지 않는다. 환경별 Argo CD 설정 차이를 먼저 확인한다.
 - 환경 확장은 `values.yaml -> values-{env}.yaml` 병합을 전제로 한다. 환경별 예외를 base values에 넣지 않는다.
-- 네임스페이스 규칙은 `{env}-order-ns`, `{env}-user-ns`, `{env}-ingress-nginx-ns`를 따른다.
+- 네임스페이스 규칙은 팀(서비스)별로 분리한다: `order-{env}`(주문팀), `user-{env}`(회원관리팀), `ingress-nginx-{env}`(인프라).
 - ingress class는 환경별로 `nginx-dev`, `nginx-stg`, `nginx-prod`를 사용한다.
+- AppProject도 팀별로 분리한다: order-service는 `order-{env}`, user-service는 `user-{env}`, ingress-nginx는 `infra-{env}`. Application 이름은 `order-service-{env}`, `user-service-{env}`, `ingress-nginx-{env}`로 env를 뒤에 둔다.
+- 디렉토리는 워크로드/플랫폼으로 나눈다: `argocd/{applications,projects}/{env}/apps`(order, user), `.../{env}/infra`(ingress-nginx).
 
 ## CRITICAL 주의사항
 
@@ -32,7 +34,7 @@
 
 ## 작업 순서
 
-1. 먼저 `argocd/{env}/applications`에서 실제 동기화 대상 `repoURL`, `targetRevision`, `path`, `valueFiles`를 확인한다.
+1. 먼저 `argocd/applications/{env}`에서 실제 동기화 대상 `repoURL`, `targetRevision`, `path`, `valueFiles`를 확인한다.
 2. 환경 공통 변경인지, 특정 환경 변경인지 먼저 결정한다.
 3. 서비스 차트 수정 시 `order-service`와 `user-service` 차이를 비교한다.
 4. 필요하면 `helm template`로 렌더링을 확인하되, 배포 기준은 Argo CD 선언으로 본다.
@@ -44,7 +46,7 @@
 - `prod` Application은 `targetRevision: master`를 본다.
 - `dev/stg` image updater 전략은 `newest-build` + 환경별 태그 정규식이다.
 - `prod` image updater 전략은 `semver`다.
-- `AppProject`는 환경별 namespace와 `sourceRepos`를 제한한다. 새 저장소나 namespace를 쓰려면 Application만이 아니라 AppProject도 같이 수정해야 한다.
+- `AppProject`는 환경과 도메인별 namespace, `sourceRepos`, cluster resource 권한을 제한한다. 새 저장소나 namespace를 쓰려면 Application만이 아니라 해당 AppProject도 같이 수정해야 한다.
 
 ## 검증 명령
 
