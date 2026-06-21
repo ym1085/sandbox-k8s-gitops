@@ -54,7 +54,7 @@ echo "ArgoCD 설치 중 (Helm)"
 helm install argocd argo/argo-cd \
     --namespace argocd \
     --version $ARGOCD_VERSION \
-    -f "$ROOT_DIR/argocd/install/${PROFILE}/core/values.yaml" \
+    -f "$ROOT_DIR/argocd/${PROFILE}/install/core/values.yaml" \
     --wait
 
 ####################################
@@ -63,7 +63,7 @@ helm install argocd argo/argo-cd \
 helm install argocd-image-updater argo/argocd-image-updater \
     --namespace argocd \
     --version 0.12.0 \
-    -f "$ROOT_DIR/argocd/install/${PROFILE}/image-updater/values.yaml"
+    -f "$ROOT_DIR/argocd/${PROFILE}/install/image-updater/values.yaml"
 
 ####################################
 # ArgoCD 서버 Pod가 준비될때까지 대기

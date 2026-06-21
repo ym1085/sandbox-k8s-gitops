@@ -1,0 +1,9 @@
+server:
+  service:
+    type: NodePort
+    nodePortHttp: 31180
+    nodePortHttps: 31543
+
+configs:
+  params:
+    server.insecure: true

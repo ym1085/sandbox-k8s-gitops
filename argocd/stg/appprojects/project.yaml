@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: stg-project
+  namespace: argocd
+spec:
+  description: "ArgoCD Staging Environment Project"
+
+  sourceRepos:
+    - "https://github.com/ym1085/sandbox-k8s-gitops.git"
+    - "https://kubernetes.github.io/ingress-nginx"
+
+  destinations:
+    - namespace: "stg-order-ns"
+      server: https://kubernetes.default.svc
+
+    - namespace: "stg-user-ns"
+      server: https://kubernetes.default.svc
+
+    - namespace: "stg-ingress-nginx-ns"
+      server: https://kubernetes.default.svc
+
+    - namespace: "argocd"
+      server: https://kubernetes.default.svc
+
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
