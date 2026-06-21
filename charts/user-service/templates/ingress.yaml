@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.Name }}-ingress
+  name: {{ .Chart.Name }}-ingress
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "app.commonLabels" . | nindent 4 }}
@@ -27,7 +27,7 @@ spec:
           pathType: {{ .pathType }}
           backend:
             service:
-              name: {{ $.Values.app.labels.env }}-{{ .backend.service.name }}
+              name: {{ .backend.service.name }}
               port:
                 number: {{ .backend.service.port.number }}
         {{- end }}
