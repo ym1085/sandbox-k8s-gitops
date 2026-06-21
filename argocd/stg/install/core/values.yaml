@@ -1,11 +1,9 @@
-# ArgoCD Helm Chart Custom Values
 server:
   service:
-    type: NodePort # NodePort로 설정하여 외부에서 Ingress 없이 바로 접속 가능하도록 설정
-    nodePortHttp: 31180 # ArgoCD HTTP 포트
-    nodePortHttps: 31543 # ArgoCD HTTPS 포트
+    type: NodePort
+    nodePortHttp: 31180
+    nodePortHttps: 31543
 
-# ArgoCD UI 설정
 configs:
   params:
-    server.insecure: true # HTTPS 없이 접속
+    server.insecure: true

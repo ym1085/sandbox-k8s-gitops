@@ -1,21 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: stg-order-service # Argo CD UI 및 CLI에서 식별할 애플리케이션의 고유 이름
-  namespace: argocd # Argo CD 컨트롤러가 설치된 네임스페이스 (기본값은 보통 'argocd')
+  name: stg-order-service
+  namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: "order-api=youngmin1085/order-service"
     argocd-image-updater.argoproj.io/order-api.update-strategy: "newest-build"
     argocd-image-updater.argoproj.io/order-api.allow-tags: "regexp:^stg-[a-f0-9]{7}$"
-    argocd-image-updater.argoproj.io/order-api.helm.image-name: deployment.containers[0].image # values-stg.yaml의 deployment.containers[0].image
-    argocd-image-updater.argoproj.io/order-api.helm.image-tag: deployment.containers[0].tag # values-stg.yaml의 deployment.containers[0].tag
+    argocd-image-updater.argoproj.io/order-api.helm.image-name: deployment.containers[0].image
+    argocd-image-updater.argoproj.io/order-api.helm.image-tag: deployment.containers[0].tag
     argocd-image-updater.argoproj.io/write-back-method: git
 spec:
   project: stg-project
 
   source:
     repoURL: https://github.com/ym1085/sandbox-k8s-gitops.git
-    targetRevision: stg # 바라볼 Git Branch/Tag 변경
+    targetRevision: stg
     path: charts/order-service
     helm:
       valueFiles:
@@ -27,10 +27,10 @@ spec:
 
   syncPolicy:
     automated:
-      prune: true # Git에서 삭제된 리소스를 실제 클러스터에서도 자동 삭제
-      selfHeal: true # 클러스터 리소스가 수동으로 수정되어 Git과 달라졌을 때 자동으로 복구(동기화)
+      prune: true
+      selfHeal: true
     syncOptions:
-      - CreateNamespace=true # Namespace가 없는 경우 ArgoCD가 생성
-      - ServerSideApply=true # YAML 파일 계산(수정)을 API Server에서 처리
-      - ServerSideDiff=true # Diff 계산을 API Server에서 처리
-      - PruneLast=true # 리소스 삭제 시 생성을 먼저 하고 마지막에 처리
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - ServerSideDiff=true
+      - PruneLast=true

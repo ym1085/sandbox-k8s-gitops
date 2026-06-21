@@ -1,9 +1,9 @@
 config:
-  registries: # 사용할 컨테이너 이미지 레지스트리 목록
-    - name: Docker Hub # 레지스트리 이름 (임의 지정 가능)
-      api_url: "https://registry-1.docker.io" # 레지스트리 API URL
-      prefix: "docker.io" # 이미지 Pull 시 사용할 이미지 경로 접두사
-      ping: true # 레지스트리에 접근 가능한지 체크할지 여부 (true면 주기적으로 ping)
-      credentials: pullsecret:argocd/docker-hub-creds # 인증 정보가 저장된 ArgoCD secret 경로
-      default: true # 여러 레지스트리 중 기본으로 사용할 레지스트리로 설정
-  logLevel: debug # 로그 레벨 설정
+  registries:
+    - name: Docker Hub
+      api_url: "https://registry-1.docker.io"
+      prefix: "docker.io"
+      ping: true
+      credentials: pullsecret:argocd/docker-hub-creds
+      default: true
+  logLevel: debug
