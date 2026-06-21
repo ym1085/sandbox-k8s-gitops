@@ -10,3 +10,11 @@ spec:
   destinations:
     - namespace: "order-dev"
       server: https://kubernetes.default.svc
+  clusterResourceWhitelist: []
+  namespaceResourceWhitelist:
+    - group: "apps"
+      kind: "Deployment"
+    - group: ""
+      kind: "Service"
+    - group: "networking.k8s.io"
+      kind: "Ingress"
