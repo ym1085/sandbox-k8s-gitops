@@ -26,5 +26,5 @@ echo -e "ROOT_DIR: $ROOT_DIR\n"
 # AppProject 생성
 ####################################
 echo "Creating AppProject..."
-kubectl apply -f "$ROOT_DIR/argocd/appprojects/${PROFILE}/project.yaml"
+kubectl apply -f "$ROOT_DIR/argocd/${PROFILE}/appprojects/project.yaml"
 echo "AppProject created successfully"

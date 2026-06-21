@@ -6,15 +6,15 @@
 
 ## 수정 위치 규칙
 
-- 실제 배포 경로와 동기화 기준은 `argocd/applications/{env}`에서 확인한다.
-- 배포 허용 범위와 프로젝트 정책은 `argocd/appprojects/{env}`에서 관리한다.
+- 실제 배포 경로와 동기화 기준은 `argocd/{env}/applications`에서 확인한다.
+- 배포 허용 범위와 프로젝트 정책은 `argocd/{env}/appprojects`에서 관리한다.
 - 서비스 스펙 변경은 `charts/order-service`, `charts/user-service`에서 한다.
 - `ingress-nginx`는 로컬 chart가 아니라 Argo CD가 외부 Helm repo에서 직접 설치한다.
 - 환경별 차이는 반드시 `values-{env}.yaml`에 둔다. 공통값만 `values.yaml`에 둔다.
 
 ## 아키텍처 규칙
 
-- CRITICAL: 실제 배포 설정은 항상 `argocd/applications/{env}`를 먼저 본다.
+- CRITICAL: 실제 배포 설정은 항상 `argocd/{env}/applications`를 먼저 본다.
 - CRITICAL: 어떤 환경에 무엇이 배포되는지는 항상 Argo CD Application 기준으로 판단한다.
 - CRITICAL: `order-service`와 `user-service`는 구조가 유사하지만 완전히 동일하지 않다. 한쪽만 보고 공통 리팩터링하지 않는다.
 - CRITICAL: `dev`, `stg`, `prod`는 같은 방식으로 운영되지 않는다. 환경별 Argo CD 설정 차이를 먼저 확인한다.
@@ -32,7 +32,7 @@
 
 ## 작업 순서
 
-1. 먼저 `argocd/applications/{env}`에서 실제 동기화 대상 `repoURL`, `targetRevision`, `path`, `valueFiles`를 확인한다.
+1. 먼저 `argocd/{env}/applications`에서 실제 동기화 대상 `repoURL`, `targetRevision`, `path`, `valueFiles`를 확인한다.
 2. 환경 공통 변경인지, 특정 환경 변경인지 먼저 결정한다.
 3. 서비스 차트 수정 시 `order-service`와 `user-service` 차이를 비교한다.
 4. 필요하면 `helm template`로 렌더링을 확인하되, 배포 기준은 Argo CD 선언으로 본다.
